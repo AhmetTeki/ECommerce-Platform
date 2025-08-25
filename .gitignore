@@ -1,0 +1,99 @@
+# ========================
+# .NET / C# Build Outputs
+# ========================
+bin/
+obj/
+[Bb]uild/
+[Ll]og/
+[Ll]ogs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.vs/
+.vscode/
+_ReSharper*/
+*.DotSettings.user
+
+# ========================
+# Paketler
+# ========================
+*.nupkg
+*.snupkg
+*.nuspec
+packages/
+*.dll
+*.exe
+*.app
+*.cache
+*.pdb
+
+# ========================
+# Test Sonuçları
+# ========================
+*.TestResults/
+TestResult.xml
+coverage/
+*.coverage
+*.coveragexml
+
+# ========================
+# Rider / VS / VS Code
+# ========================
+.idea/
+.vscode/
+*.code-workspace
+
+# ========================
+# Docker / Container
+# ========================
+.docker/
+docker-compose.override.yml
+docker-compose.override.*.yml
+*.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# ========================
+# Redis / Mongo / PostgreSQL Data
+# ========================
+/data/redis/*
+/data/mongo/*
+/data/postgres/*
+*.rdb
+*.aof
+*.bson
+*.wt
+
+# ========================
+# Config / Secrets
+# ========================
+appsettings.json
+appsettings.*.json
+secrets.json
+*.key
+*.crt
+*.pem
+
+# ========================
+# Logs
+# ========================
+*.log
+logs/
+log/
+
+# ========================
+# Postman
+# ========================
+*.postman_environment.json
+*.postman_collection.json
+
+# ========================
+# System Files
+# ========================
+.DS_Store
+Thumbs.db
+ehthumbs.db
+desktop.ini
