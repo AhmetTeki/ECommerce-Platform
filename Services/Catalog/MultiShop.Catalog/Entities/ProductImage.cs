@@ -17,5 +17,6 @@ public class ProductImage
 
     public string ProductId { get; set; }
     
+    [BsonIgnore]
     public Product Product { get; set; }
 }
