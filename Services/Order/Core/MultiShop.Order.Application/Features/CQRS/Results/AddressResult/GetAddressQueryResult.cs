@@ -1,6 +1,6 @@
-﻿namespace MultiShop.Order.Domain.Entities;
+﻿namespace MultiShop.Order.Application.Features.CQRS.Results.AddressResult;
 
-public class Address
+public class GetAddressQueryResult
 {
     public int AddressId { get; set; }
 

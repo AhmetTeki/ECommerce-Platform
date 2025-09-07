@@ -1,9 +1,7 @@
-﻿namespace MultiShop.Order.Domain.Entities;
+﻿namespace MultiShop.Order.Application.Features.CQRS.Commands.AddressCommands;
 
-public class Address
+public class CreateAddressCommand
 {
-    public int AddressId { get; set; }
-
     public string UserId { get; set; }
 
     public string District { get; set; }

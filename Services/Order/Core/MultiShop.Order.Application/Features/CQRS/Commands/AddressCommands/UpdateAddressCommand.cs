@@ -1,6 +1,6 @@
-﻿namespace MultiShop.Order.Domain.Entities;
+﻿namespace MultiShop.Order.Application.Features.CQRS.Commands.AddressCommands;
 
-public class Address
+public class UpdateAddressCommand
 {
     public int AddressId { get; set; }
 
