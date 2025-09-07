@@ -20,7 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\" />
+    <ProjectReference Include="..\..\Core\MultiShop.Order.Application\MultiShop.Order.Application.csproj" />
+    <ProjectReference Include="..\..\Domain\MultiShop.Order.Domain\MultiShop.Order.Domain.csproj" />
   </ItemGroup>
 
 </Project>
