@@ -33,7 +33,7 @@ public class AddressesController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> AddressListById(int id)
+    public async Task<IActionResult> GetAddressById(int id)
     {
         GetAddressByIdQueryResult values =await _getAddressByIdQueryHandler.Handle(new GetAddressByIdQuery(id));
         return Ok(values);
