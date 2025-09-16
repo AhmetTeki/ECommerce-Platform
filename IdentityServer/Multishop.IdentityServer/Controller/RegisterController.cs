@@ -1,4 +1,6 @@
 ﻿using System.Threading.Tasks;
+using IdentityServer4;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Multishop.IdentityServer.Dtos;
@@ -6,6 +8,7 @@ using Multishop.IdentityServer.Models;
 
 namespace Multishop.IdentityServer.Controller
 {
+    [Authorize(IdentityServerConstants.LocalApi.PolicyName)]
     [Route("api/[controller]")]
     [ApiController]
     public class RegisterController : ControllerBase
