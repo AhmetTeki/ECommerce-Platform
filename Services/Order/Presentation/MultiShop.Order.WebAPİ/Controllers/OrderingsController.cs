@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MultiShop.Order.Application.Features.Mediator.Commands.OrderingCommands;
 using MultiShop.Order.Application.Features.Mediator.Queries.OrderingQueries;
@@ -6,6 +7,7 @@ using MultiShop.Order.Application.Features.Mediator.Results.OrderingResults;
 
 namespace MultiShop.Order.WebAPİ.Controllers;
 
+[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class OrderingsController : ControllerBase
@@ -23,7 +25,7 @@ public class OrderingsController : ControllerBase
         List<GetOrderingQueryResult> values = await _mediator.Send(new GetOrderingQuery());
         return Ok(values);
     }
-    
+
     [HttpGet("{id}")]
     public async Task<IActionResult> GetOrderingById(int id)
     {
@@ -37,14 +39,14 @@ public class OrderingsController : ControllerBase
         await _mediator.Send(createOrderingCommand);
         return Ok("success");
     }
-    
+
     [HttpDelete]
     public async Task<IActionResult> RemoveOrdering(int id)
     {
         await _mediator.Send(new RemoveOrderingCommand(id));
         return Ok("success");
     }
-    
+
     [HttpPut]
     public async Task<IActionResult> UpdateOrdering(UpdateOrderingCommand updateOrderingCommand)
     {
