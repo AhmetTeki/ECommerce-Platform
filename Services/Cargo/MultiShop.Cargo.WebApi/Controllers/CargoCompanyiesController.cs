@@ -6,11 +6,11 @@ namespace MultiShop.Cargo.WebApi.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-public class CargoCompanyController : ControllerBase
+public class CargoCompanyiesController : ControllerBase
 {
     private readonly ICargoCompanyService _cargoCompanyService;
 
-    public CargoCompanyController(ICargoCompanyService cargoCompanyService)
+    public CargoCompanyiesController(ICargoCompanyService cargoCompanyService)
     {
         _cargoCompanyService = cargoCompanyService;
     }
@@ -34,6 +34,18 @@ public class CargoCompanyController : ControllerBase
         await _cargoCompanyService.TDeleteAsync(id);
         return Ok("success");
     }
-    
-    [HttpGet]
+
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetCargoCompanyById(int id)
+    {
+        CargoCompany values = await _cargoCompanyService.TGetByIdAsync(id);
+        return Ok(values);
+    }
+
+    [HttpPut]
+    public async Task<IActionResult> UpdateCargoCompany(CargoCompany cargoCompany)
+    {
+        await _cargoCompanyService.TUpdateAsync(cargoCompany);
+        return Ok("success");
+    }
 }
