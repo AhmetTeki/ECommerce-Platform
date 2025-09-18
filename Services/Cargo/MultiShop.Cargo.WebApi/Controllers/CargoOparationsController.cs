@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using MultiShop.Cargo.Bussines.Abstract;
 using MultiShop.Cargo.Entity.Concrete;
 
 namespace MultiShop.Cargo.WebApi.Controllers;
-
+[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class CargoOparationsController : Controller
