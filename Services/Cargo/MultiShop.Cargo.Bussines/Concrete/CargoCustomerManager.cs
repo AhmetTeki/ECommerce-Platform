@@ -4,11 +4,11 @@ using MultiShop.Cargo.Entity.Concrete;
 
 namespace MultiShop.Cargo.Bussines.Concrete;
 
-public class CargoCutomerManager  : ICargoCustomerService
+public class CargoCustomerManager  : ICargoCustomerService
 {
     private readonly ICargoCustomerDal  _cargoCustomerDal;
 
-    public CargoCutomerManager(ICargoCustomerDal cargoCustomerDal)
+    public CargoCustomerManager(ICargoCustomerDal cargoCustomerDal)
     {
         _cargoCustomerDal = cargoCustomerDal;
     }
