@@ -8,7 +8,7 @@ public class RedisService
     private readonly int _port;
 
     private ConnectionMultiplexer _connection;
-    public RedisService(int port, string host)
+    public RedisService( string host ,int port)
     {
         _port = port;
         _host = host;
