@@ -2,8 +2,6 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/UILayout/_UILayout.cshtml";
 }
-
-<!-- Breadcrumb Start -->
 <div class="container-fluid">
     <div class="row px-xl-5">
         <div class="col-12">
@@ -15,30 +13,13 @@
         </div>
     </div>
 </div>
-<!-- Breadcrumb End -->
-<!-- Shop Start -->
 <div class="container-fluid">
     <div class="row px-xl-5">
-        <!-- Shop Sidebar Start -->
         <div class="col-lg-3 col-md-4">
-            <!-- Price Start -->
             @await Component.InvokeAsync("_PriceFilterPartial")
-            <!-- Price End -->
-
-            <!-- Color Start -->
             @await Component.InvokeAsync("_ColorFilterPartial")
-            <!-- Color End -->
-
-            <!-- Size Start -->
             @await Component.InvokeAsync("_SizeFilterPartial")
-            <!-- Size End -->
         </div>
-        <!-- Shop Sidebar End -->
-
-
-        <!-- Shop Product Start -->
         @await Component.InvokeAsync("_ProductListPartial")
-        <!-- Shop Product End -->
     </div>
 </div>
-<!-- Shop End -->

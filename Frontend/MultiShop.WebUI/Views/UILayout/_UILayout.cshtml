@@ -3,9 +3,7 @@
 }
 <!DOCTYPE html>
 <html lang="en">
-
     @await Component.InvokeAsync("_HeaderPartial")
-
     <body>
         @await Component.InvokeAsync("_TopbarPartial")
         @await Component.InvokeAsync("_NavbarPartial")
@@ -13,5 +11,4 @@
         @await Component.InvokeAsync("_FooterPartial")
         @await Component.InvokeAsync("_ScriptPartial")
     </body>
-
 </html>
