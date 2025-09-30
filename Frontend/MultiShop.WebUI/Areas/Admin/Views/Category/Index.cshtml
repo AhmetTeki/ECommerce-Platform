@@ -47,13 +47,14 @@
                                         <th scope="row">@item.CategoryId</th>
                                         <td>@item.CategoryName</td>
                                         <td>.</td>
-                                        <td><a class="btn btn-warning">Update</a></td>
-                                        <td><a class="btn btn-danger">Delete</a></td>
+                                        <td><a href="@Url.Action("UpdateCategory", "Category", new { area = "Admin", id = item.CategoryId })" class="btn btn-warning">Update</a></td>
+                                        <td><a href="@Url.Action("DeleteCategory", "Category", new { area = "Admin", id = item.CategoryId })" class="btn btn-danger">Delete</a>
+                                        </td>
                                     </tr>
                                 }
                             </tbody>
                         </table>
-                        <a class="btn btn-success">Yeni Kategori Girişi</a>
+                        <a href="/Admin/Category/CreateCategory/" class="btn btn-success">Yeni Kategori Girişi</a>
                     </div>
                 </div>
             </div>
