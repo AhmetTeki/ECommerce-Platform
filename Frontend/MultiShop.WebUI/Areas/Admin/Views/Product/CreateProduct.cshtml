@@ -1,0 +1,53 @@
+﻿@using MultiShop.Dto.CatalogDtos.CategoryDtos
+@model MultiShop.Dto.CatalogDtos.ProductDtos.CreateProductDto
+@{
+    ViewData["Title"] = "CreateProduct";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content-wrapper">
+    <section class="content container-fluid">
+        <div class="row">
+            <div class="col-md-12" style="float: right">
+                <div class="chart-box">
+                    <h4>Add Product</h4>
+                    <p>
+                        You can add new product here.
+                    </p>
+                    <div class="bs-example" data-example-id="simple-table">
+                        <form method="post">
+                            <label>Product Name</label>
+                            <input type="text" class="form-control" placeholder="Product Name" asp-for="ProductName">
+                            <br/>
+                            <label>Product Price</label>
+                            <input type="text" class="form-control" placeholder="Product Price" asp-for="ProductPrice">
+                            <br/>
+                            <label>Product Image Url</label>
+                            <input type="text" class="form-control" placeholder="Product Image Url" asp-for="ProductImageUrl">
+                            <br/>
+                            <label>Product Description</label>
+                            <textarea type="text" class="form-control" placeholder="Product Description" asp-for="ProductDescription"
+                                      rows="5"></textarea>
+                            <br/>
+                            <label>Product Category</label>
+                            <select asp-for="CategoryId" class="form-control" required style="height: 40px;!important;">
+                                <option value="">Kategori Seçiniz</option>
+                                @if (Model.Categories != null)
+                                {
+                                    foreach (ResultCategoryDto item in Model.Categories)
+                                    {
+                                        <option value="@item.CategoryId" selected="selected">@item.CategoryName</option>
+                                    }
+                                }
+                            </select>
+                            <br/>
+                            <button type="submit" class="btn btn-primary">Add Product</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+

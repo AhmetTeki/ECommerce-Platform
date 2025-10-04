@@ -35,12 +35,14 @@ public class CategoryController : Controller
     }
 
     [HttpGet]
+    [Route("CreateCategory")]
     public IActionResult CreateCategory()
     {
         return View();
     }
 
     [HttpPost]
+    [Route("CreateCategory")]
     public async Task<IActionResult> CreateCategory(CreateCategoryDto category)
     {
         HttpClient? client = _httpClientFactory.CreateClient();
