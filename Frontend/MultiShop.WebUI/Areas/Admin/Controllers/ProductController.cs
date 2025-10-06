@@ -34,6 +34,22 @@ public class ProductController : Controller
 
         return View();
     }
+    
+    [Route("ProductListWithCategory")]
+    public async Task<IActionResult> ProductListWithCategory()
+    {
+        HttpClient? client = _httpClientFactory.CreateClient();
+        HttpResponseMessage response = await client.GetAsync("http://localhost:7099/api/Products/ProductListWithCategory");
+
+        if (response.IsSuccessStatusCode)
+        {
+            string jsonData = await response.Content.ReadAsStringAsync();
+            List<ResultProductWithCategoryDto>? values = JsonConvert.DeserializeObject<List<ResultProductWithCategoryDto>>(jsonData);
+            return View(values);
+        }
+
+        return View();
+    }
 
     [HttpGet]
     [Route("CreateProduct")]

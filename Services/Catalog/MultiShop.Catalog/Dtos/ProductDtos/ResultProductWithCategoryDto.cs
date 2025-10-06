@@ -1,6 +1,7 @@
-﻿using MultiShop.Dto.CatalogDtos.CategoryDtos;
+﻿using MultiShop.Catalog.Dtos.CategoryDtos;
+using MultiShop.Catalog.Entities;
 
-namespace MultiShop.Dto.CatalogDtos.ProductDtos;
+namespace MultiShop.Catalog.Dtos.ProductDtos;
 
 public class ResultProductWithCategoryDto
 {
@@ -13,7 +14,7 @@ public class ResultProductWithCategoryDto
     public string ProductImageUrl { get; set; }
 
     public string ProductDescription { get; set; }
-    
+
     public string CategoryId { get; set; }
     public ResultCategoryDto Category { get; set; }
 }
