@@ -16,7 +16,7 @@
                     </p>
                     <div class="bs-example" data-example-id="simple-table">
                         <form method="post">
-                            <input type="hidden" asp-for="ProductId" />
+                            <input type="hidden" asp-for="ProductId"/>
                             <label>Product Name</label>
                             <input type="text" class="form-control" placeholder="Product Name" asp-for="ProductName">
                             <br/>
@@ -33,12 +33,10 @@
                             <label>Product Category</label>
                             <select asp-for="CategoryId" class="form-control" required style="height: 40px;!important;">
                                 <option value="">Kategori Seçiniz</option>
-
                                 @foreach (ResultCategoryDto item in Model.Categories)
                                 {
                                     <option value="@item.CategoryId" selected="selected">@item.CategoryName</option>
                                 }
-
                             </select>
                             <br/>
                             <button type="submit" class="btn btn-primary">Update Product</button>

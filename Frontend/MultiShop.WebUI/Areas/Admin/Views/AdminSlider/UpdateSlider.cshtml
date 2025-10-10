@@ -1,0 +1,36 @@
+﻿@model MultiShop.Dto.CatalogDtos.SliderDtos.UpdateSliderDto
+@{
+    ViewData["Title"] = "UpdateSlider";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content-wrapper">
+    <section class="content container-fluid">
+        <div class="row">
+            <div class="col-md-12" style="float: right">
+                <div class="chart-box">
+                    <h4>Update Slider</h4>
+                    <p>
+                        You can update slider here.
+                    </p>
+                    <div class="bs-example" data-example-id="simple-table">
+                        <form method="post">
+                            <input type="hidden" asp-for="FeatureSliderId"/>
+                            <label>Slider Title</label>
+                            <input type="text" class="form-control" placeholder="Slider Title" asp-for="Title">
+                            <br/>
+                            <label>Slider Description</label>
+                            <input type="text" class="form-control" placeholder="Slider Description" asp-for="Description">
+                            <br/>
+                            <label>Slider Image</label>
+                            <input type="text" class="form-control" placeholder="Slider Image" asp-for="ImageUrl">
+                            <br/>
+                            <button type="submit" class="btn btn-primary">Update Category</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
