@@ -1,8 +1,36 @@
-﻿
+﻿@model MultiShop.Dto.CatalogDtos.SpecialDiscountDto.CreateSpecialDiscountDto
 @{
     ViewData["Title"] = "CreateSpecialDiscount";
     Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
 }
 
-<h1>CreateSpecialDiscount</h1>
+<div class="content-wrapper">
+    <section class="content container-fluid">
+        <div class="row">
+            <div class="col-md-12" style="float: right">
+                <div class="chart-box">
+                    <h4>Add Special Discount</h4>
+                    <p>
+                        You can add new special discount here.
+                    </p>
+                    <div class="bs-example" data-example-id="simple-table">
+                        <form method="post">
+                            <label>Title</label>
+                            <input type="text" class="form-control" placeholder="Special Discount Title" asp-for="Title">
+                            <br/>
+                            <label>Subtitle</label>
+                            <input type="text" class="form-control" placeholder="Special Discount Subtitle" asp-for="SubTitle">
+                            <br/>
+                            <label>Image Url</label>
+                            <input type="text" class="form-control" placeholder="Special Discount Image" asp-for="ImageUrl">
+                            <br/>
+                            <button type="submit" class="btn btn-primary">Add Special Discount</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
 

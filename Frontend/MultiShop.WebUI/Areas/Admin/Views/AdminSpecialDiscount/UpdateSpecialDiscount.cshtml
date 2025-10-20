@@ -1,8 +1,36 @@
-﻿
+﻿@model MultiShop.Dto.CatalogDtos.SpecialDiscountDto.UpdateSpecialDiscountDto
 @{
     ViewData["Title"] = "UpdateSpecialDiscount";
     Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
 }
 
-<h1>UpdateSpecialDiscount</h1>
-
+<div class="content-wrapper">
+    <section class="content container-fluid">
+        <div class="row">
+            <div class="col-md-12" style="float: right">
+                <div class="chart-box">
+                    <h4>Update Special Discount</h4>
+                    <p>
+                        You can update Special Discount here.
+                    </p>
+                    <div class="bs-example" data-example-id="simple-table">
+                        <form method="post">
+                            <input type="hidden" class="form-control" r asp-for="SpecialDiscountId">
+                            <br/>
+                            <label>Title</label>
+                            <input type="text" class="form-control" placeholder="Special Discount Title" asp-for="Title">
+                            <br/>
+                            <label>Subtitle</label>
+                            <input type="text" class="form-control" placeholder="Special Discount Subtitle" asp-for="SubTitle">
+                            <br/>
+                            <label>Image Url</label>
+                            <input type="text" class="form-control" placeholder="Special Discount Image" asp-for="ImageUrl">
+                            <br/>
+                            <button type="submit" class="btn btn-primary">Update Special Discount</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
