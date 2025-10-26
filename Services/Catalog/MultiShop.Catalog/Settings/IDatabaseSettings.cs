@@ -12,6 +12,7 @@ public interface IDatabaseSettings
     public string FeatureSliderCollectionName { get; set; }
     public string SpecialDiscountCollectionName { get; set; }
     public string BrandCollectionName { get; set; }
+    public string AboutCollectionName { get; set; }
     public string FeatureCollectionName { get; set; }
     public string OfferDiscountCollectionName { get; set; }
     

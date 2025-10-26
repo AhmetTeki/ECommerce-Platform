@@ -1,0 +1,40 @@
+﻿@model MultiShop.Dto.CatalogDtos.AboutDto.UpdateAboutDto
+@{
+    ViewData["Title"] = "UpdateAbout";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content-wrapper">
+    <section class="content container-fluid">
+        <div class="row">
+            <div class="col-md-12" style="float: right">
+                <div class="chart-box">
+                    <h4>Update About</h4>
+                    <p>
+                        You can update About here.
+                    </p>
+                    <div class="bs-example" data-example-id="simple-table">
+                        <form method="post">
+                            <input type="hidden" asp-for="AboutId"/>
+                            <label>Address</label>
+                            <input type="text" class="form-control" placeholder="Address" asp-for="Address">
+                            <br/>
+                            <label>Email</label>
+                            <input type="text" class="form-control" placeholder="Email" asp-for="Email">
+                            <br/>
+                            <label>Phone</label>
+                            <input type="text" class="form-control" placeholder="Phone" asp-for="Phone">
+                            <br/>
+                            <label>Description</label>
+                            <input type="text" class="form-control" placeholder="Description" asp-for="Descripton">
+                            <br/>
+                            <button type="submit" class="btn btn-primary">Update About</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
