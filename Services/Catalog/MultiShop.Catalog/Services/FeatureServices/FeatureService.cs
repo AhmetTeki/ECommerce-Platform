@@ -33,7 +33,7 @@ public class FeatureService : IFeatureService
 
     public async Task UpdateFeatureAsync(UpdateFeatureDto updateFeatureDto)
     {
-       var values= _mapper.Map<Feature>(updateFeatureDto);
+       Feature? values= _mapper.Map<Feature>(updateFeatureDto);
        await _feature.FindOneAndReplaceAsync(x=>x.FeatureId == updateFeatureDto.FeatureId, values);
     }
 

@@ -1,0 +1,35 @@
+﻿@model MultiShop.Dto.CatalogDtos.OfferDiscountDtos.CreateOfferDiscountDto
+@{
+    ViewData["Title"] = "CreateOfferDiscount";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content-wrapper">
+    <section class="content container-fluid">
+        <div class="row">
+            <div class="col-md-12" style="float: right">
+                <div class="chart-box">
+                    <h4>Add Offer Discount</h4>
+                    <p>
+                        You can add new offer discount here.
+                    </p>
+                    <div class="bs-example" data-example-id="simple-table">
+                        <form method="post">
+                            <label>Title</label>
+                            <input type="text" class="form-control" placeholder="Offer Title" asp-for="Title">
+                            <br/>
+                            <label>Subtitle</label>
+                            <input type="text" class="form-control" placeholder="Offer Subtitle" asp-for="SubTitle">
+                            <br/>
+                            <label>Image Url</label>
+                            <input type="text" class="form-control" placeholder="Offer Image" asp-for="ImageUrl">
+                            <br/>
+                            <button type="submit" class="btn btn-primary">Add Offer Discount</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+

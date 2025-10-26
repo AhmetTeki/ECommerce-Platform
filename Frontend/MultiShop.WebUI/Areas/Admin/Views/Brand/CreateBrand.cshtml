@@ -1,0 +1,32 @@
+﻿@model MultiShop.Dto.CatalogDtos.BrandDtos.CreateBrandDto
+@{
+    ViewData["Title"] = "CreateBrand";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content-wrapper">
+    <section class="content container-fluid">
+        <div class="row">
+            <div class="col-md-12" style="float: right">
+                <div class="chart-box">
+                    <h4>Add Brand</h4>
+                    <p>
+                        You can add new brand here.
+                    </p>
+                    <div class="bs-example" data-example-id="simple-table">
+                        <form method="post">
+                            <label>Brand Name</label>
+                            <input type="text" class="form-control" placeholder="Brand Name" asp-for="Name">
+                            <br/>
+                            <label>Brand Image</label>
+                            <input type="text" class="form-control" placeholder="Brand Image" asp-for="ImageUrl">
+                            <br/>
+                            <button type="submit" class="btn btn-primary">Add Brand</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+

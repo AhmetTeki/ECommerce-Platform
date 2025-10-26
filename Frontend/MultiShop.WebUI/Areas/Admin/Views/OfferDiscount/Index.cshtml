@@ -1,4 +1,4 @@
-﻿@model List<MultiShop.Dto.CatalogDtos.FeatureDtos.ResultFeatureDto>
+﻿@model List<MultiShop.Dto.CatalogDtos.OfferDiscountDtos.ResultOfferDiscountDto>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
@@ -20,7 +20,7 @@
         <div class="row">
             <div class="col-md-12" style="float: right">
                 <div class="chart-box">
-                    <h4>Feature List</h4>
+                    <h4>Offer Discount List</h4>
                     <p>
                         For basic styling&mdash;light padding and only horizontal dividers&mdash;add the base class <code>.table</code> to
                         any
@@ -36,8 +36,8 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Feature Title</th>
-                                    <th>Feature Icon</th>
+                                    <th>Title</th>
+                                    <th>Subtitle</th>
                                     <th>Update</th>
                                     <th>Delete</th>
                                 </tr>
@@ -49,24 +49,23 @@
                                     <tr>
                                         <th scope="row">@count</th>
                                         <td>@item.Title</td>
-                                        <td>@item.Icon</td>
+                                        <td>@item.SubTitle</td>
                                         <td>
-                                            <a href="@Url.Action("UpdateFeature", "Feature", new { area = "Admin", id = item.FeatureId })"
+                                            <a href="@Url.Action("UpdateOfferDiscount", "OfferDiscount", new { area = "Admin", id = item.OfferDiscountId })"
                                                class="btn btn-warning">Update</a></td>
                                         <td>
-                                            <a href="@Url.Action("DeleteFeature", "Feature", new { area = "Admin", id = item.FeatureId })"
+                                            <a href="@Url.Action("DeleteOfferDiscount", "OfferDiscount", new { area = "Admin", id = item.OfferDiscountId })"
                                                class="btn btn-danger">Delete</a>
                                         </td>
                                     </tr>
                                 }
                             </tbody>
                         </table>
-                        <a href="/Admin/Feature/CreateFeature/" class="btn btn-success">Add Feature</a>
+                        <a href="/Admin/OfferDiscount/CreateOfferDiscount" class="btn btn-success">Add Offer Discount</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 </div>
-
 
