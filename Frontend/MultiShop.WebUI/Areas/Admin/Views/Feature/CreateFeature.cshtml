@@ -1,0 +1,32 @@
+﻿@model MultiShop.Dto.CatalogDtos.FeatureDtos.CreateFeatureDto
+@{
+    ViewData["Title"] = "CreateFeature";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content-wrapper">
+    <section class="content container-fluid">
+        <div class="row">
+            <div class="col-md-12" style="float: right">
+                <div class="chart-box">
+                    <h4>Add Feature</h4>
+                    <p>
+                        You can add new feature here.
+                    </p>
+                    <div class="bs-example" data-example-id="simple-table">
+                        <form method="post">
+                            <label>Feature Title</label>
+                            <input type="text" class="form-control" placeholder="Feature Title" asp-for="Title">
+                            <br/>
+                            <label>Feature Icon</label>
+                            <input type="text" class="form-control" placeholder="Category Description" asp-for="Icon">
+                            <br/>
+                            <button type="submit" class="btn btn-primary">Add Slider</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+

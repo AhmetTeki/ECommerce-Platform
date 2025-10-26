@@ -3,12 +3,12 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace MultiShop.Catalog.Entities;
 
-public class Category
+public class Feature
 {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
-    public string CategoryId { get; set; }
+    public string FeatureId { get; set; }
 
-    public string CategoryName { get; set; }
-    public string ImageUrl { get; set; }
+    public string Title { get; set; }
+    public string Icon { get; set; }
 }
