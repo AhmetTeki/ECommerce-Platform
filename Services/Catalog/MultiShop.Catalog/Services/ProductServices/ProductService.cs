@@ -60,4 +60,14 @@ public class ProductService: IProductService
        }
        return _mapper.Map<List<ResultProductWithCategoryDto>>(values);
     }
+
+    public async Task<List<ResultProductWithCategoryDto>> GetProductWithCategoryByCategoryIdAsync(string CategoryId)
+    {
+        List<Product>? values= await _productCollection.Find(x=>x.CategoryId==CategoryId).ToListAsync();
+        foreach (var item in values)
+        {
+            item.Category= await _categoryCollection.Find(x=>x.CategoryId == item.CategoryId).FirstAsync();
+        }
+        return _mapper.Map<List<ResultProductWithCategoryDto>>(values);
+    }
 }

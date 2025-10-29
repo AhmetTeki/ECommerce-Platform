@@ -20,6 +20,6 @@
             @await Component.InvokeAsync("_ColorFilterPartial")
             @await Component.InvokeAsync("_SizeFilterPartial")
         </div>
-        @await Component.InvokeAsync("_ProductListPartial")
+        @await Component.InvokeAsync("_ProductListPartial", new {id=ViewBag.CategoryId})
     </div>
 </div>
