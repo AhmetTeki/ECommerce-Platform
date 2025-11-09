@@ -8,10 +8,8 @@ namespace MultiShop.Catalog.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-
 public class ProductImagesController : ControllerBase
 {
-    
     private readonly IProductImageService _productImageService;
 
     public ProductImagesController(IProductImageService productImageService)
@@ -22,9 +20,17 @@ public class ProductImagesController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> ProductImageList()
     {
-        List<ResultProductImageDto> values =await _productImageService.GetAllProductImageAsync();
+        List<ResultProductImageDto> values = await _productImageService.GetAllProductImageAsync();
         return Ok(values);
     }
+
+    [HttpGet("ProductImagesByProductId")]
+    public async Task<IActionResult> ProductImagesByProductId(string id)
+    {
+        GetByIdProductImageDto values = await _productImageService.GetByProductIdProductImageAsync(id);
+        return Ok(values);
+    }
+
 
     [HttpGet("{id}")]
     public async Task<IActionResult> GetProductImageById(string id)
@@ -32,25 +38,25 @@ public class ProductImagesController : ControllerBase
         GetByIdProductImageDto value = await _productImageService.GetByIdProductImageAsync(id);
         return Ok(value);
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> CreateProductImage(CreateProductImageDto createProductImageDto)
     {
         await _productImageService.CreateProductImageAsync(createProductImageDto);
         return Ok("Success");
     }
-    
+
     [HttpDelete]
     public async Task<IActionResult> DeleteProductImage(string id)
     {
         await _productImageService.DeleteProductImageAsync(id);
         return Ok("Success");
     }
-    
+
     [HttpPut]
     public async Task<IActionResult> UpdateProductImage(UpdateProductImageDto updateProductImageDto)
     {
         await _productImageService.UpdateProductImageAsync(updateProductImageDto);
-        return Ok("Success");  
+        return Ok("Success");
     }
 }

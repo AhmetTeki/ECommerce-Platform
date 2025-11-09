@@ -14,9 +14,9 @@
     </div>
 </div>
 <div class="container-fluid pb-5">
-    @await Component.InvokeAsync("_ProductDetailSliderPartial")
+    @await Component.InvokeAsync("_ProductDetailSliderPartial", new { id = ViewBag.ProductId })
     @await Component.InvokeAsync("_ProductDetailInformation")
-   
+
 </div>
 <!-- Shop Detail End -->
 

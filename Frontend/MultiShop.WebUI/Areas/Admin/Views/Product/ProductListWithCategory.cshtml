@@ -42,6 +42,7 @@
                                     <th>Price</th>
                                     <th>Update</th>
                                     <th>Delete</th>
+                                    <th>Ürün Görselleri</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -59,6 +60,10 @@
                                         <td>
                                             <a href="@Url.Action("UpdateProduct", "Product", new { area = "Admin", id = item.ProductId })"
                                                class="btn btn-danger">Delete</a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("ProductImageDetail", "ProductImage", new { area = "Admin", id = item.ProductId })"
+                                               class="btn btn-success">Ürün Göreselleri</a>
                                         </td>
                                     </tr>
                                 }

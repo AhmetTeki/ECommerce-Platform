@@ -1,0 +1,36 @@
+﻿@model MultiShop.Dto.CatalogDtos.ProductImageDtos.UpdateProductImageDto
+@{
+    ViewData["Title"] = "UpdateImage";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content-wrapper">
+    <section class="content container-fluid">
+        <div class="row">
+            <div class="col-md-12" style="float: right">
+                <div class="chart-box">
+                    <h4>Update Product Image</h4>
+                    <p>
+                        You can update product image here.
+                    </p>
+                    <div class="bs-example" data-example-id="simple-table">
+                        <form method="post">
+                            <input type="hidden" class="form-control"  placeholder="Category Name" asp-for="ProductImageID">
+                            <input type="hidden" class="form-control"  placeholder="Category Name" asp-for="ProductId">
+                            <label>Image 1</label>
+                            <input type="text" class="form-control" placeholder="Image 1" asp-for="Image1">
+                            <br/>
+                            <label>Image 2</label>
+                            <input type="text" class="form-control" placeholder="Image 2" asp-for="Image2">
+                            <br/>
+                            <label>Image 3</label>
+                            <input type="text" class="form-control" placeholder="Image 3" asp-for="Image3">
+                            <br/>
+                            <button type="submit" class="btn btn-primary">Update Image</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
