@@ -1,5 +1,9 @@
+using MultiShop.Comment.Context;
+
 var builder = WebApplication.CreateBuilder(args);
 
+
+builder.Services.AddDbContext<CommentContex>();
 // Add services to the container.
 
 builder.Services.AddControllers();
