@@ -80,7 +80,7 @@ public class ProductController : Controller
 
         if (response.IsSuccessStatusCode)
         {
-            return RedirectToAction("Index", "Product", new { area = "Admin" });
+            return RedirectToAction("ProductListWithCategory", "Product", new { area = "Admin" });
         }
 
         return View();
@@ -93,7 +93,7 @@ public class ProductController : Controller
         HttpResponseMessage response = await client.DeleteAsync("http://localhost:7099/api/Products/" + id);
         if (response.IsSuccessStatusCode)
         {
-            return RedirectToAction("Index", "Product", new { area = "Admin" });
+            return RedirectToAction("ProductListWithCategory", "Product", new { area = "Admin" });
         }
 
         return View();
@@ -148,7 +148,7 @@ public class ProductController : Controller
         HttpResponseMessage response = await client.PutAsync("http://localhost:7099/api/Products/", stringContent);
         if (response.IsSuccessStatusCode)
         {
-            return RedirectToAction("Index", "Product", new { area = "Admin" });
+            return RedirectToAction("ProductListWithCategory", "Product", new { area = "Admin" });
         }
 
         return View();

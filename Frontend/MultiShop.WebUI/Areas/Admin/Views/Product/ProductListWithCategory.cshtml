@@ -42,7 +42,8 @@
                                     <th>Price</th>
                                     <th>Update</th>
                                     <th>Delete</th>
-                                    <th>Ürün Görselleri</th>
+                                    <th>Product Images</th>
+                                    <th>Product Detail</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -56,14 +57,19 @@
                                         <td>@item.ProductPrice</td>
                                         <td>
                                             <a href="@Url.Action("UpdateProduct", "Product", new { area = "Admin", id = item.ProductId })"
-                                               class="btn btn-warning">Update</a></td>
+                                               class="btn btn-warning">Update</a>
+                                        </td>
                                         <td>
-                                            <a href="@Url.Action("UpdateProduct", "Product", new { area = "Admin", id = item.ProductId })"
+                                            <a href="@Url.Action("DeleteProduct", "Product", new { area = "Admin", id = item.ProductId })"
                                                class="btn btn-danger">Delete</a>
                                         </td>
                                         <td>
                                             <a href="@Url.Action("ProductImageDetail", "ProductImage", new { area = "Admin", id = item.ProductId })"
-                                               class="btn btn-success">Ürün Göreselleri</a>
+                                               class="btn btn-success">Prodcut Images</a>
+                                        </td>
+                                        <td>
+                                            <a href="@Url.Action("UpdateProductDetail", "ProductDetail", new { area = "Admin", id = item.ProductId })"
+                                               class="btn btn-success">Product Details</a>
                                         </td>
                                     </tr>
                                 }

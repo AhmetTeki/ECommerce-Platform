@@ -31,6 +31,13 @@ public class ProductDetailsController : ControllerBase
         return Ok(value);
     }
 
+    [HttpGet("GetProductDetailByProductId")]
+    public async Task<IActionResult> GetProductDetailByProductId(string id)
+    {
+        GetByIdProductDetailDto value = await _productDetailService.GetByProductIdProductDetailAsync(id);
+        return Ok(value);
+    }
+
     [HttpPost]
     public async Task<IActionResult> CreateProductDetail(CreateProductDetailDto createProductDetailDto)
     {

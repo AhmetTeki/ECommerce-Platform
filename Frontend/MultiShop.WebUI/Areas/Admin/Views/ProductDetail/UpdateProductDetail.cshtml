@@ -1,0 +1,33 @@
+﻿@model MultiShop.Dto.CatalogDtos.ProductDetailDtos.UpdateProductDetailDto
+@{
+    ViewData["Title"] = "UpdateCategory";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content-wrapper">
+    <section class="content container-fluid">
+        <div class="row">
+            <div class="col-md-12" style="float: right">
+                <div class="chart-box">
+                    <h4>Update Product Detail</h4>
+                    <p>
+                        You can update product detail here.
+                    </p>
+                    <div class="bs-example" data-example-id="simple-table">
+                        <form method="post">
+                            <input type="hidden" class="form-control"  asp-for="ProductDetailID">
+                            <input type="hidden" class="form-control"  asp-for="ProductId">
+                            <label>Product Description</label>
+                            <input type="text" class="form-control" placeholder="Product Description" asp-for="ProductDescription">
+                            <br/>
+                            <label>Product Info</label>
+                            <input type="text" class="form-control" placeholder="Product Info" asp-for="ProductInfo">
+                            <br/>
+                            <button type="submit" class="btn btn-primary">Update Product Detail</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
