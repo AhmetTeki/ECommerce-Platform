@@ -50,9 +50,18 @@ public class CommentsController : ControllerBase
     [HttpDelete]
     public IActionResult DeleteComment(int id)
     {
-        UserComment values = _commentContext.UserComments.Find(id);
-        _commentContext.UserComments.Remove(values);
+        UserComment? values = _commentContext.UserComments.Find(id);
+        if (values != null) _commentContext.UserComments.Remove(values);
         _commentContext.SaveChanges();
         return Ok("success");
     }
+
+    [HttpGet("CommentListByProductId")]
+    public IActionResult CommentListByProductId(string id)
+    {
+        List<UserComment> value = _commentContext.UserComments.Where(x => x.ProductId == id).ToList();
+        return Ok(value);
+    }
+    
+    
 }
