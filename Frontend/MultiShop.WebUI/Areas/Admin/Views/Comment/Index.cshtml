@@ -1,0 +1,74 @@
+﻿@model List<MultiShop.Dto.CommentDtos.ResultCommentDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+}
+<div class="wrapper">
+    <section class="content-header">
+        <h1>Basic Tables</h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+            <li class="active"><i class="fa fa-envelope-o"></i> Tables</li>
+            <li class="active"><i class="fa fa-bars"></i> Basic Tables</li>
+        </ol>
+    </section>
+</div>
+<div class="content-wrapper">
+    <section class="content container-fluid">
+        <div class="row">
+            <div class="col-md-12" style="float: right">
+                <div class="chart-box">
+                    <h4>Comment List</h4>
+                    <p>
+                        For basic styling&mdash;light padding and only horizontal dividers&mdash;add the base class <code>.table</code> to
+                        any
+                        <code>&lt;table&gt;</code>. It may seem super redundant, but given the widespread use of tables for other plugins
+                        like
+                        calendars and date pickers, we've opted to isolate our custom table styles.
+                    </p>
+                    <div class="bs-example" data-example-id="simple-table">
+                        <table class="table">
+                            <caption>
+                                Optional table caption.
+                            </caption>
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>User Name & Surname</th>
+                                    <th>Comment</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Update</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    count++;
+                                    <tr>
+                                        <th scope="row">@count</th>
+                                        <td>@item.NameSurname</td>
+                                        <td>@item.CommentDetail</td>
+                                        <td>@item.CreatedDate.ToShortDateString()</td>
+                                        <td>@item.Status</td>
+                                        <td>
+                                            <a href="@Url.Action("UpdateComment", "Comment", new { area = "Admin", id = item.UserCommentId })"
+                                               class="btn btn-warning">Update</a></td>
+                                        <td>
+                                            <a href="@Url.Action("DeleteComment", "Comment", new { area = "Admin", id = item.UserCommentId })"
+                                               class="btn btn-danger">Delete</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+

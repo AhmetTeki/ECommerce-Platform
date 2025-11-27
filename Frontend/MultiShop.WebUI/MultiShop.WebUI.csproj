@@ -34,4 +34,10 @@
     <ProjectReference Include="..\MultiShop.Dto\MultiShop.Dto.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <AdditionalFiles Include="Areas\Admin\Views\Comment\CreateCategory.cshtml" />
+    <AdditionalFiles Include="Areas\Admin\Views\Comment\Index.cshtml" />
+    <AdditionalFiles Include="Areas\Admin\Views\Comment\UpdateCategory.cshtml" />
+  </ItemGroup>
+
 </Project>

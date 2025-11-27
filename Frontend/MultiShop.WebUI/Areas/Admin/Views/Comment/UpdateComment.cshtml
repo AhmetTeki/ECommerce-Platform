@@ -1,0 +1,48 @@
+﻿@model MultiShop.Dto.CommentDtos.UpdateCommentDto
+@{
+    ViewData["Title"] = "UpdateCategory";
+    Layout = "~/Areas/Admin/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content-wrapper">
+    <section class="content container-fluid">
+        <div class="row">
+            <div class="col-md-12" style="float: right">
+                <div class="chart-box">
+                    <h4>Update Comment Status</h4>
+                    <p>
+                        You can update comment status here.
+                    </p>
+                    <div class="bs-example" data-example-id="simple-table">
+                        <form method="post">
+                            <input type="hidden" class="form-control" asp-for="UserCommentId">
+                            <input type="hidden" class="form-control" asp-for="ImageUrl">
+                            <input type="hidden" class="form-control" asp-for="ProductId">
+                            <label>User Name</label>
+                            <input type="text" class="form-control" asp-for="NameSurname" readonly>
+                            <br/>
+                            <label>Email</label>
+                            <input type="text" class="form-control" asp-for="Email" readonly>
+                            <br/>
+                            <label>Comment</label>
+                            <input type="text" class="form-control" asp-for="CommentDetail" readonly>
+                            <br/>
+                            <label>Date</label>
+                            <input type="text" class="form-control" asp-for="CreatedDate" readonly>
+                            <br/>
+                            <label>Rating</label>
+                            <input type="text" class="form-control" asp-for="Rating" readonly>
+                            <br/>
+                            <label>Status</label>
+                            <input type="checkbox" asp-for="Status" class="form-check-input" />
+                            <br/>
+                            <br/>
+                            <button type="submit" class="btn btn-primary">Update Comment Status</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+

@@ -8,11 +8,11 @@ namespace MultiShop.Comment.Controllers;
 [AllowAnonymous]
 [Route("api/[controller]")]
 [ApiController]
-public class CommentController : ControllerBase
+public class CommentsController : ControllerBase
 {
     private readonly CommentContex _commentContext;
 
-    public CommentController(CommentContex commentContext)
+    public CommentsController(CommentContex commentContext)
     {
         _commentContext = commentContext;
     }
