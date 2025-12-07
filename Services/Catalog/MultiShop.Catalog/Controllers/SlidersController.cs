@@ -5,7 +5,7 @@ using MultiShop.Catalog.Services.FeatureSliderServices;
 
 namespace MultiShop.Catalog.Controllers;
 
-[AllowAnonymous]
+[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class SlidersController : ControllerBase
@@ -17,7 +17,7 @@ public class SlidersController : ControllerBase
         _featureSliderService = featureSliderService;
     }
 
-    
+
     [HttpGet]
     public async Task<IActionResult> SliderList()
     {

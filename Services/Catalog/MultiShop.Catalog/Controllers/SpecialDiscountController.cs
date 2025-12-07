@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MultiShop.Catalog.Dtos.CategoryDtos;
 using MultiShop.Catalog.Dtos.SpecialDiscountDtos;
 using MultiShop.Catalog.Services.SpecialDiscountServices;
 
 namespace MultiShop.Catalog.Controllers;
 
-[AllowAnonymous]
+[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class SpecialDiscountController : ControllerBase

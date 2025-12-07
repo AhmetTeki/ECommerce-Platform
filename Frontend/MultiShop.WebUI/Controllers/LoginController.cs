@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
 using MultiShop.Dto.IdentityDtos.LoginDtos;
 using MultiShop.WebUI.Models;
+using MultiShop.WebUI.Services;
 using Newtonsoft.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
@@ -15,10 +16,12 @@ namespace MultiShop.WebUI.Controllers;
 public class LoginController : Controller
 {
     private readonly IHttpClientFactory _httpClientFactory;
+    private readonly ILoginService _loginService;
 
-    public LoginController(IHttpClientFactory httpClientFactory)
+    public LoginController(IHttpClientFactory httpClientFactory, ILoginService loginService)
     {
         _httpClientFactory = httpClientFactory;
+        _loginService = loginService;
     }
 
     public IActionResult Index()
@@ -55,6 +58,9 @@ public class LoginController : Controller
                     IsPersistent = true
                 };
                 await HttpContext.SignInAsync(JwtBearerDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProps);
+
+                // var id = _loginService.GetUserId;
+
                 return RedirectToAction("Index", "Default");
             }
         }
