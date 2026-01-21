@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using MultiShop.Dto.IdentityDtos.LoginDtos;
 using MultiShop.WebUI.Models;
 using MultiShop.WebUI.Services;
+using MultiShop.WebUI.Services.Interfaces;
 using Newtonsoft.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
@@ -17,11 +18,13 @@ public class LoginController : Controller
 {
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly ILoginService _loginService;
+    private readonly IIdentityService _identityService;
 
-    public LoginController(IHttpClientFactory httpClientFactory, ILoginService loginService)
+    public LoginController(IHttpClientFactory httpClientFactory, ILoginService loginService, IIdentityService identityService)
     {
         _httpClientFactory = httpClientFactory;
         _loginService = loginService;
+        _identityService = identityService;
     }
 
     public IActionResult Index()
@@ -67,4 +70,18 @@ public class LoginController : Controller
 
         return View();
     }
+    
+    // public IActionResult SignUp()
+    // {
+    //     return View();
+    // }
+    //[HttpPost]
+    public async Task<IActionResult> SignUp(SignUpDto signUpDto)
+    {
+        signUpDto.UserName = "Ahmet";
+        signUpDto.Password = "Ahmet02340.";
+        await _identityService.SignIn(signUpDto);
+        return RedirectToAction("Index", "Default");
+    }
+    
 }

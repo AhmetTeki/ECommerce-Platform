@@ -2,6 +2,7 @@
 using IdentityModel.Client;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using MultiShop.Dto.IdentityDtos.LoginDtos;
@@ -27,7 +28,7 @@ public class IdentityService : IIdentityService
     {
         DiscoveryDocumentResponse? discoveryEndPoint = await _httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
         {
-            Address = "http://localhost:7099",
+            Address = "http://localhost:5001",
             Policy = new DiscoveryPolicy
             {
                 RequireHttps = false
@@ -49,10 +50,11 @@ public class IdentityService : IIdentityService
             Token = token.AccessToken,
             Address = discoveryEndPoint.UserInfoEndpoint
         };
-        
+
         UserInfoResponse userValues = await _httpClient.GetUserInfoAsync(userInfoRequest);
-        
-        ClaimsIdentity claimsIdentity = new ClaimsIdentity(userValues.Claims,CookieAuthenticationDefaults.AuthenticationScheme,"name", "role");
+
+        ClaimsIdentity claimsIdentity =
+            new ClaimsIdentity(userValues.Claims, CookieAuthenticationDefaults.AuthenticationScheme, "name", "role");
 
         ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
@@ -75,7 +77,11 @@ public class IdentityService : IIdentityService
                 Value = DateTime.Now.AddMinutes(token.ExpiresIn).ToString()
             }
         });
-        authenticationProperties.IsPersistent=true;
-        
+        authenticationProperties.IsPersistent = true;
+        await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal,
+            authenticationProperties);
+        return true;
     }
+
+   
 }
