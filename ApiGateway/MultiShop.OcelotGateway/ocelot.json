@@ -20,9 +20,7 @@
       "UpstreamScheme": "http",
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "OcelotAuthenticationScheme",
-        "AllowedScopes": [
-          "CatalogFullPermission"
-        ]
+        "AllowedScopes": ["CatalogFullPermission"]
       }
     },
     //Discount Mikroservis
@@ -45,9 +43,7 @@
       "UpstreamScheme": "http",
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "OcelotAuthenticationScheme",
-        "AllowedScopes": [
-          "DiscountFullPermission"
-        ]
+        "AllowedScopes": ["DiscountFullPermission"]
       }
     },
     //Order
@@ -70,9 +66,7 @@
       "UpstreamScheme": "http",
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "OcelotAuthenticationScheme",
-        "AllowedScopes": [
-          "OrderFullPermission"
-        ]
+        "AllowedScopes": ["OrderFullPermission"]
       }
     },
     //cargo
@@ -96,9 +90,7 @@
       "UpstreamScheme": "http",
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "OcelotAuthenticationScheme",
-        "AllowedScopes": [
-          "CargoFullPermission"
-        ]
+        "AllowedScopes": ["CargoFullPermission"]
       }
     },
     //basket
@@ -121,9 +113,7 @@
       "UpstreamScheme": "http",
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "OcelotAuthenticationScheme",
-        "AllowedScopes": [
-          "BasketFullPermission"
-        ]
+        "AllowedScopes": ["BasketFullPermission"]
       }
     },
     //comment
@@ -146,9 +136,7 @@
       "UpstreamScheme": "http",
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "OcelotAuthenticationScheme",
-        "AllowedScopes": [
-          "CommentFullPermission"
-        ]
+        "AllowedScopes": ["CommentFullPermission"]
       }
     },
     //Payment
@@ -171,9 +159,7 @@
       "UpstreamScheme": "http",
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "OcelotAuthenticationScheme",
-        "AllowedScopes": [
-          "PaymentFullPermission"
-        ]
+        "AllowedScopes": ["PaymentFullPermission"]
       }
     },
     //Images
@@ -196,9 +182,7 @@
       "UpstreamScheme": "http",
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "OcelotAuthenticationScheme",
-        "AllowedScopes": [
-          "ImagesFullPermission"
-        ]
+        "AllowedScopes": ["ImageFullPermission"]
       }
     }
   ],
