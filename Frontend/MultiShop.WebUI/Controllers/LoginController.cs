@@ -81,7 +81,7 @@ public class LoginController : Controller
         signUpDto.UserName = "Ahmet";
         signUpDto.Password = "Ahmet02340.";
         await _identityService.SignIn(signUpDto);
-        return RedirectToAction("Index", "Default");
+        return RedirectToAction("Index", "User");
     }
     
 }

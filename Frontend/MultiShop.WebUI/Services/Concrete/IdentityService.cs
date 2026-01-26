@@ -87,7 +87,7 @@ public class IdentityService : IIdentityService
 
     public async Task<bool> GetRefreshToken()
     {
-         DiscoveryDocumentResponse? discoveryEndPoint = await _httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
+        DiscoveryDocumentResponse? discoveryEndPoint = await _httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
         {
             Address = _servicesApiSettings.IdentityServerUrl,
             Policy = new DiscoveryPolicy
@@ -106,35 +106,40 @@ public class IdentityService : IIdentityService
             Address = discoveryEndPoint.TokenEndpoint
         };
 
-        UserInfoResponse userValues = await _httpClient.GetUserInfoAsync(userInfoRequest);
+        TokenResponse? token = await _httpClient.RequestRefreshTokenAsync(refreshTokenRequest);
 
-        ClaimsIdentity claimsIdentity =
-            new ClaimsIdentity(userValues.Claims, CookieAuthenticationDefaults.AuthenticationScheme, "name", "role");
-
-        ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
-
-        AuthenticationProperties authenticationProperties = new AuthenticationProperties();
-        authenticationProperties.StoreTokens(new List<AuthenticationToken>()
+        var authenticationToken = new List<AuthenticationToken>()
         {
-            new AuthenticationToken()
+            new AuthenticationToken
             {
                 Name = OpenIdConnectParameterNames.AccessToken,
                 Value = token.AccessToken
             },
-            new AuthenticationToken()
+            new AuthenticationToken
             {
                 Name = OpenIdConnectParameterNames.RefreshToken,
                 Value = token.RefreshToken
             },
-            new AuthenticationToken()
+            new AuthenticationToken
             {
                 Name = OpenIdConnectParameterNames.ExpiresIn,
-                Value = DateTime.Now.AddMinutes(token.ExpiresIn).ToString()
+                Value = DateTime.Now.AddSeconds(token.ExpiresIn).ToString()
             }
-        });
-        authenticationProperties.IsPersistent = true;
-        await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal,
-            authenticationProperties);
+        };
+
+        AuthenticateResult result = await _httpContextAccessor.HttpContext.AuthenticateAsync();
+
+        AuthenticationProperties? properties = result.Properties;
+
+        if (properties != null)
+        {
+            properties.StoreTokens(authenticationToken);
+
+            if (result.Principal != null)
+                await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, result.Principal,
+                    properties);
+        }
+
         return true;
     }
 }
