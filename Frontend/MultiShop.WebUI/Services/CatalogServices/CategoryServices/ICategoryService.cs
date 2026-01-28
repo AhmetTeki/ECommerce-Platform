@@ -12,5 +12,5 @@ public interface ICategoryService
     
     Task DeleteCategoryAsync(string id);
     
-    Task<GetByIdCategoryDto> GetByIdCategoryAsync(string id);
+    Task<UpdateCategoryDto> GetByIdCategoryAsync(string id);
 }

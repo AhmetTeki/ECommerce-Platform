@@ -76,12 +76,12 @@ public class LoginController : Controller
     //     return View();
     // }
     //[HttpPost]
-    public async Task<IActionResult> SignUp(SignUpDto signUpDto)
-    {
-        signUpDto.UserName = "Ahmet";
-        signUpDto.Password = "Ahmet02340.";
-        await _identityService.SignIn(signUpDto);
-        return RedirectToAction("Index", "User");
-    }
+    // public async Task<IActionResult> SignUp(SignUpDto signUpDto)
+    // {
+    //     signUpDto.UserName = "Ahmet";
+    //     signUpDto.Password = "Ahmet02340.";
+    //     await _identityService.SignIn(signUpDto);
+    //     return RedirectToAction("Index", "User");
+    // }
     
 }
