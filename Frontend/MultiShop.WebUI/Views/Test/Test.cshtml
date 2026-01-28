@@ -1,0 +1,10 @@
+﻿@model List<MultiShop.Dto.CatalogDtos.CategoryDtos.ResultCategoryDto>
+
+@{
+    Layout = null;
+}
+
+@foreach (var item in Model)
+{
+    <p>@item.CategoryName</p>
+}

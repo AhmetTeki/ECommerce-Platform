@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using MultiShop.WebUI.Handlers;
 using MultiShop.WebUI.Services;
+using MultiShop.WebUI.Services.CatalogServices.CategoryServices;
 using MultiShop.WebUI.Services.Concrete;
 using MultiShop.WebUI.Services.Interfaces;
 using MultiShop.WebUI.Settings;
@@ -27,10 +28,12 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         opt.LoginPath = "/Login/Index";
         opt.ExpireTimeSpan = TimeSpan.FromMinutes(30);
         opt.Cookie.Name = "MultishopCookie";
-        opt.SlidingExpiration=true;
+        opt.SlidingExpiration = true;
     });
 
+builder.Services.AddAccessTokenManagement();
 builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddScoped<ILoginService, LoginService>();
 
 builder.Services.AddHttpClient<IIdentityService, IdentityService>();
@@ -45,11 +48,20 @@ builder.Services.Configure<ServicesApiSettings>(builder.Configuration.GetSection
 
 builder.Services.AddScoped<ResourceOwnerPasswordTokenHandler>();
 
-var values=builder.Configuration.GetSection("ServiceApiSettings").Get<ServicesApiSettings>();
-builder.Services.AddHttpClient<IUserService, UserService>(opt =>
+builder.Services.AddScoped<ClientCredentialTokenHandler>();
+
+builder.Services.AddHttpClient<IClientCredentialTokenService, ClientCredentialTokenService>();
+
+var values = builder.Configuration.GetSection("ServiceApiSettings").Get<ServicesApiSettings>();
+builder.Services.AddHttpClient<IUserService, UserService>(opt => { opt.BaseAddress = new Uri(values.IdentityServerUrl); })
+    .AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();
+
+
+builder.Services.AddHttpClient<ICategoryService, CategoryService>(opt =>
 {
-    opt.BaseAddress = new Uri(values.IdentityServerUrl);
-}).AddHttpMessageHandler<ResourceOwnerPasswordTokenHandler>();  
+    opt.BaseAddress = new Uri($"{values.OcelotUrl}/{values.Catalog.Path}");
+}).AddHttpMessageHandler<ClientCredentialTokenHandler>();
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())

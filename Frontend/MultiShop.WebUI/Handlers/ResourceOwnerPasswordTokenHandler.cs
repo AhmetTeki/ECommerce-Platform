@@ -11,7 +11,7 @@ public class ResourceOwnerPasswordTokenHandler : DelegatingHandler
     private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly IIdentityService _identityService;
 
-    public ResourceOwnerPasswordTokenHandler(HttpContextAccessor httpContextAccessor, IIdentityService identityService)
+    public ResourceOwnerPasswordTokenHandler(IHttpContextAccessor httpContextAccessor, IIdentityService identityService)
     {
         _httpContextAccessor = httpContextAccessor;
         _identityService = identityService;
