@@ -1,37 +1,25 @@
-﻿using System.Text;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop.Dto.CatalogDtos.SliderDtos;
-using Newtonsoft.Json;
+using MultiShop.WebUI.Services.CatalogServices.SliderServices;
 
 namespace MultiShop.WebUI.Areas.Admin.Controllers;
 
 [Area("Admin")]
-[AllowAnonymous]
 [Route("Admin/AdminSlider")]
 public class AdminSliderController : Controller
 {
-    private readonly IHttpClientFactory _httpClientFactory;
+    private readonly ISliderService _sliderService;
 
-    public AdminSliderController(IHttpClientFactory httpClientFactory)
+    public AdminSliderController(ISliderService sliderService)
     {
-        _httpClientFactory = httpClientFactory;
+        _sliderService = sliderService;
     }
 
     [Route("Index")]
     public async Task<IActionResult> Index()
     {
-        HttpClient? client = _httpClientFactory.CreateClient();
-        HttpResponseMessage response = await client.GetAsync("http://localhost:7099/api/Sliders");
-
-        if (response.IsSuccessStatusCode)
-        {
-            string jsonData = await response.Content.ReadAsStringAsync();
-            List<ResultSliderDto>? values = JsonConvert.DeserializeObject<List<ResultSliderDto>>(jsonData);
-            return View(values);
-        }
-
-        return View();
+        List<ResultSliderDto> values = await _sliderService.GetAllSliderAsync();
+        return View(values);
     }
 
     [HttpGet]
@@ -45,65 +33,30 @@ public class AdminSliderController : Controller
     [Route("CreateSlider")]
     public async Task<IActionResult> CreateSlider(CreateSliderDto slider)
     {
-        slider.Status = false;
-        HttpClient? client = _httpClientFactory.CreateClient();
-        string jsonData = JsonConvert.SerializeObject(slider);
-
-        StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-
-        HttpResponseMessage response = await client.PostAsync("http://localhost:7099/api/Sliders", stringContent);
-
-        if (response.IsSuccessStatusCode)
-        {
-            return RedirectToAction("Index", "AdminSlider", new { area = "Admin" });
-        }
-
-        return View();
+        await _sliderService.CreateSliderAsync(slider);
+        return RedirectToAction("Index", "AdminSlider", new { area = "Admin" });
     }
 
     [Route("DeleteSlider/{id}")]
     public async Task<IActionResult> DeleteSlider(string id)
     {
-        HttpClient? client = _httpClientFactory.CreateClient();
-        HttpResponseMessage response = await client.DeleteAsync($"http://localhost:7099/api/Sliders/" + id);
-        if (response.IsSuccessStatusCode)
-        {
-            return RedirectToAction("Index", "AdminSlider", new { area = "Admin" });
-        }
-
-        return View();
+        await _sliderService.DeleteSliderAsync(id);
+        return RedirectToAction("Index", "AdminSlider", new { area = "Admin" });
     }
 
     [Route("UpdateSlider/{id}")]
     [HttpGet]
     public async Task<IActionResult> UpdateSlider(string id)
     {
-        HttpClient? client = _httpClientFactory.CreateClient();
-        HttpResponseMessage response = await client.GetAsync("http://localhost:7099/api/Sliders/" + id);
-        if (response.IsSuccessStatusCode)
-        {
-            string jsonData = await response.Content.ReadAsStringAsync();
-            UpdateSliderDto? values = JsonConvert.DeserializeObject<UpdateSliderDto>(jsonData);
-            return View(values);
-        }
-
-        return View();
+        UpdateSliderDto value = await _sliderService.GetByIdSliderAsync(id);
+        return View(value);
     }
-    
+
     [Route("UpdateSlider/{id}")]
     [HttpPost]
     public async Task<IActionResult> UpdateSlider(UpdateSliderDto slider)
     {
-        HttpClient? client = _httpClientFactory.CreateClient();
-        string jsonDataa = JsonConvert.SerializeObject(slider);
-        StringContent stringContent = new StringContent(jsonDataa, Encoding.UTF8, "application/json");
-        
-        HttpResponseMessage response = await client.PutAsync("http://localhost:7099/api/Sliders/" , stringContent);
-        if (response.IsSuccessStatusCode)
-        {
-            return RedirectToAction("Index", "AdminSlider", new { area = "Admin" });
-        }
-
-        return View();
+        await _sliderService.UpdateSliderAsync(slider);
+        return RedirectToAction("Index", "AdminSlider", new { area = "Admin" });
     }
 }

@@ -1,37 +1,25 @@
-﻿using System.Text;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop.Dto.CatalogDtos.FeatureDtos;
-using Newtonsoft.Json;
+using MultiShop.WebUI.Services.CatalogServices.FeatureServices;
 
 namespace MultiShop.WebUI.Areas.Admin.Controllers;
 
 [Area("Admin")]
-[AllowAnonymous]
 [Route("Admin/Feature")]
 public class FeatureController : Controller
 {
-    private readonly IHttpClientFactory _httpClientFactory;
+    private readonly IFeatureServices _featureServices;
 
-    public FeatureController(IHttpClientFactory httpClientFactory)
+    public FeatureController(IFeatureServices featureServices)
     {
-        _httpClientFactory = httpClientFactory;
+        _featureServices = featureServices;
     }
-    
+
     [Route("Index")]
     public async Task<IActionResult> Index()
     {
-        HttpClient? client = _httpClientFactory.CreateClient();
-        HttpResponseMessage response = await client.GetAsync("http://localhost:7099/api/Features");
-
-        if (response.IsSuccessStatusCode)
-        {
-            string jsonData = await response.Content.ReadAsStringAsync();
-            List<ResultFeatureDto>? values = JsonConvert.DeserializeObject<List<ResultFeatureDto>>(jsonData);
-            return View(values);
-        }
-
-        return View();
+        List<ResultFeatureDto> values = await _featureServices.GetAllFeatureAsync();
+        return View(values);
     }
 
     [HttpGet]
@@ -45,64 +33,30 @@ public class FeatureController : Controller
     [Route("CreateFeature")]
     public async Task<IActionResult> CreateFeature(CreateFeatureDto feature)
     {
-        HttpClient? client = _httpClientFactory.CreateClient();
-        string jsonData = JsonConvert.SerializeObject(feature);
-
-        StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-
-        HttpResponseMessage response = await client.PostAsync("http://localhost:7099/api/Features", stringContent);
-
-        if (response.IsSuccessStatusCode)
-        {
-            return RedirectToAction("Index", "Feature", new { area = "Admin" });
-        }
-
-        return View();
+       await _featureServices.CreateFeatureAsync(feature);
+       return RedirectToAction("Index", "Feature", new { area = "Admin" });
     }
 
     [Route("DeleteFeature/{id}")]
     public async Task<IActionResult> DeleteFeature(string id)
     {
-        HttpClient? client = _httpClientFactory.CreateClient();
-        HttpResponseMessage response = await client.DeleteAsync($"http://localhost:7099/api/Features/" + id);
-        if (response.IsSuccessStatusCode)
-        {
-            return RedirectToAction("Index", "Feature", new { area = "Admin" });
-        }
-
-        return View();
+        await _featureServices.DeleteFeatureAsync(id);
+        return RedirectToAction("Index", "Feature", new { area = "Admin" });
     }
 
     [Route("UpdateFeature/{id}")]
     [HttpGet]
     public async Task<IActionResult> UpdateFeature(string id)
     {
-        HttpClient? client = _httpClientFactory.CreateClient();
-        HttpResponseMessage response = await client.GetAsync("http://localhost:7099/api/Features/" + id);
-        if (response.IsSuccessStatusCode)
-        {
-            string jsonData = await response.Content.ReadAsStringAsync();
-            UpdateFeatureDto? values = JsonConvert.DeserializeObject<UpdateFeatureDto>(jsonData);
-            return View(values);
-        }
-
-        return View();
+       UpdateFeatureDto value = await _featureServices.GetByIdFeatureAsync(id);
+       return View(value);
     }
     
     [Route("UpdateFeature/{id}")]
     [HttpPost]
     public async Task<IActionResult> UpdateFeature(UpdateFeatureDto feature)
     {
-        HttpClient? client = _httpClientFactory.CreateClient();
-        string jsonDataa = JsonConvert.SerializeObject(feature);
-        StringContent stringContent = new StringContent(jsonDataa, Encoding.UTF8, "application/json");
-        
-        HttpResponseMessage response = await client.PutAsync("http://localhost:7099/api/Features/" , stringContent);
-        if (response.IsSuccessStatusCode)
-        {
-            return RedirectToAction("Index", "Feature", new { area = "Admin" });
-        }
-
-        return View();
+        await _featureServices.UpdateFeatureAsync(feature);
+        return RedirectToAction("Index", "Feature", new { area = "Admin" });
     }
 }
