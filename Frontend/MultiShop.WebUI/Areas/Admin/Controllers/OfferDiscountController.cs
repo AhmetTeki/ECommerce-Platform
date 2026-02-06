@@ -1,9 +1,6 @@
-﻿using System.Text;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop.Dto.CatalogDtos.OfferDiscountDtos;
 using MultiShop.WebUI.Services.CatalogServices.OfferDiscountServices;
-using Newtonsoft.Json;
 
 namespace MultiShop.WebUI.Areas.Admin.Controllers;
 
@@ -11,13 +8,11 @@ namespace MultiShop.WebUI.Areas.Admin.Controllers;
 [Route("Admin/OfferDiscount")]
 public class OfferDiscountController : Controller
 {
-    private readonly IHttpClientFactory _httpClientFactory;
-    private readonly IOfferDsicountServices _offerDsicountServices;
+   private readonly IOfferDsicountServices _offerDsicountServices;
 
-    public OfferDiscountController(IHttpClientFactory httpClientFactory, IOfferDsicountServices offerDsicountServices)
+    public OfferDiscountController(IOfferDsicountServices offerDsicountServices)
     {
-        _httpClientFactory = httpClientFactory;
-        _offerDsicountServices = offerDsicountServices;
+       _offerDsicountServices = offerDsicountServices;
     }
 
     [Route("Index")]
