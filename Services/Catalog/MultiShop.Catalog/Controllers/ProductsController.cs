@@ -59,7 +59,7 @@ public class ProductsController : ControllerBase
         return Ok("Success");
     }
 
-    [HttpGet("ProductListWithCategoryByCategoryId")]
+    [HttpGet("ProductListWithCategoryByCategoryId/{categoryId}")]
     public async Task<IActionResult> ProductListWithCategoryByCategoryId(string categoryId)
     {
         List<ResultProductWithCategoryDto> values = await _productService.GetProductWithCategoryByCategoryIdAsync(categoryId);

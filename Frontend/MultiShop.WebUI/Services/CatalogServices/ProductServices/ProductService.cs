@@ -52,6 +52,10 @@ public class ProductService : IProductService
 
     public async Task<List<ResultProductWithCategoryDto>> GetProductWithCategoryByCategoryIdAsync(string CategoryId)
     {
-        throw new NotImplementedException();
+        HttpResponseMessage responseMessage =
+            await _httpClient.GetAsync($"products/ProductListWithCategoryByCategoryId/{CategoryId}");
+        string jsonData = await responseMessage.Content.ReadAsStringAsync();
+        List<ResultProductWithCategoryDto>? values = JsonConvert.DeserializeObject<List<ResultProductWithCategoryDto>>(jsonData);
+        return values;
     }
 }

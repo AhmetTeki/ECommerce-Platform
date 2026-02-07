@@ -1,7 +1,7 @@
 ﻿@using MultiShop.Dto.CatalogDtos.SpecialDiscountDto
-@model List<MultiShop.Dto.CatalogDtos.SpecialDiscountDto.ResultSpecialDiscountDto>
+@model List<MultiShop.Dto.CatalogDtos.OfferDiscountDtos.ResultOfferDiscountDto>
 <div class="col-lg-4">
-    @foreach (ResultSpecialDiscountDto item in Model)
+    @foreach (var item in Model)
     {
         <div class="product-offer mb-30" style="height: 200px;">
             <img class="img-fluid" src="@item.ImageUrl" alt="">
