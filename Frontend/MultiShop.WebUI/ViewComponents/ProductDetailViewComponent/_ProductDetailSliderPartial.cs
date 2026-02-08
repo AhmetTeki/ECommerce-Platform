@@ -1,45 +1,33 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MultiShop.Dto.CatalogDtos.ProductDtos;
-using MultiShop.Dto.CatalogDtos.ProductImageDtos;
-using Newtonsoft.Json;
+using MultiShop.WebUI.Services.CatalogServices.ProductDetailServices;
+using MultiShop.WebUI.Services.CatalogServices.ProductServices;
 
 namespace MultiShop.WebUI.ViewComponents.ProductDetailViewComponent;
 
 public class _ProductDetailSliderPartial : ViewComponent
 {
-    private readonly IHttpClientFactory _httpClientFactory;
+    private readonly IProductDetailServices _productDetailService;
+    private readonly IProductService _productService;
 
-    public _ProductDetailSliderPartial(IHttpClientFactory httpClientFactory)
+    public _ProductDetailSliderPartial(IProductDetailServices productService, IProductService productService1)
     {
-        _httpClientFactory = httpClientFactory;
+        _productDetailService = productService;
+        _productService = productService1;
     }
 
     public async Task<IViewComponentResult> InvokeAsync(string id)
     {
-        HttpClient? client = _httpClientFactory.CreateClient();
-        HttpClient? client2 = _httpClientFactory.CreateClient();
+        var values = await _productService.GetByIdProductAsync(id);
+        var valuesImage = await _productDetailService.GetByProductIdProductImageAsync(id);
 
-        HttpResponseMessage response = await client.GetAsync($"http://localhost:7099/api/Products/{id}");
-        HttpResponseMessage response2 =
-            await client2.GetAsync($"http://localhost:7099/api/ProductImages/ProductImagesByProductId?id=" + id);
-
-        if (response.IsSuccessStatusCode && response2.IsSuccessStatusCode)
+        ProductDetailDto dto = new ProductDetailDto
         {
-            string jsonData = await response.Content.ReadAsStringAsync();
-            string jsonDataImage = await response2.Content.ReadAsStringAsync();
+            Product = values,
+            ProductImages = valuesImage
+        };
 
-            UpdateProductDto? values = JsonConvert.DeserializeObject<UpdateProductDto>(jsonData);
-            GetByIdProductImageDto valuesImage = JsonConvert.DeserializeObject<GetByIdProductImageDto>(jsonDataImage);
 
-            ProductDetailDto dto = new ProductDetailDto
-            {
-                Product = values,
-                ProductImages = valuesImage
-            };
-
-            return View(dto);
-        }
-
-        return View();
+        return View(dto);
     }
 }

@@ -31,7 +31,7 @@ public class ProductDetailsController : ControllerBase
         return Ok(value);
     }
 
-    [HttpGet("GetProductDetailByProductId")]
+    [HttpGet("GetProductDetailByProductId/{id}")]
     public async Task<IActionResult> GetProductDetailByProductId(string id)
     {
         GetByIdProductDetailDto value = await _productDetailService.GetByProductIdProductDetailAsync(id);
