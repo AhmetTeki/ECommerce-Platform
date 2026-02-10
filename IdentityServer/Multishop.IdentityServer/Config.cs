@@ -59,7 +59,7 @@ namespace Multishop.IdentityServer
             new ApiScope("CargoFullPermission", "Full authority for cargo oparations"),
             new ApiScope("BasketFullPermission", "Full authority for basket oparations"),
             new ApiScope("OcelotFullPermission", "Full authority for ocelot oparations"),
-            new ApiScope("CommentFullPermission", "Full authority for ocelot oparations"),
+            new ApiScope("CommentFullPermission", "Full authority for comment oparations"),
             new ApiScope("PaymentFullPermission", "Full authority for ocelot oparations"),
             new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
         };

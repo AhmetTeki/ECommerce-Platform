@@ -24,7 +24,7 @@ public class ProductImagesController : ControllerBase
         return Ok(values);
     }
 
-    [HttpGet("ProductImagesByProductId{id}")]
+    [HttpGet("ProductImagesByProductId/{id}")]
     public async Task<IActionResult> ProductImagesByProductId(string id)
     {
         GetByIdProductImageDto values = await _productImageService.GetByProductIdProductImageAsync(id);

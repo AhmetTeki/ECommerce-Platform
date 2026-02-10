@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MultiShop.Comment.Context;
 using MultiShop.Comment.Entities;
 
 namespace MultiShop.Comment.Controllers;
 
-[AllowAnonymous]
+[Authorize]
 [Route("api/[controller]")]
 [ApiController]
 public class CommentsController : ControllerBase
@@ -18,32 +19,32 @@ public class CommentsController : ControllerBase
     }
 
     [HttpGet]
-    public IActionResult CommentList()
+    public async Task<IActionResult> CommentList()
     {
-        List<UserComment> values = _commentContext.UserComments.ToList();
+        List<UserComment> values = await _commentContext.UserComments.ToListAsync();
         return Ok(values);
     }
 
     [HttpGet("{id}")]
-    public IActionResult GetComment(int id)
+    public async Task<IActionResult> GetComment(int id)
     {
-        UserComment? value= _commentContext.UserComments.Find(id);
+        UserComment? value = await _commentContext.UserComments.FindAsync(id);
         return Ok(value);
     }
 
     [HttpPost]
-    public IActionResult CreateComment(UserComment userComment)
+    public async Task<IActionResult> CreateComment(UserComment userComment)
     {
-        _commentContext.UserComments.Add(userComment);
-        _commentContext.SaveChanges();
+        await _commentContext.UserComments.AddAsync(userComment);
+        await _commentContext.SaveChangesAsync();
         return Ok("success");
     }
 
     [HttpPut]
-    public IActionResult UpdateComment(UserComment userComment)
+    public async Task<IActionResult> UpdateComment(UserComment userComment)
     {
         _commentContext.UserComments.Update(userComment);
-        _commentContext.SaveChanges();
+        await _commentContext.SaveChangesAsync();
         return Ok("success");
     }
 
@@ -56,12 +57,10 @@ public class CommentsController : ControllerBase
         return Ok("success");
     }
 
-    [HttpGet("CommentListByProductId")]
+    [HttpGet("CommentListByProductId/{id}")]
     public IActionResult CommentListByProductId(string id)
     {
         List<UserComment> value = _commentContext.UserComments.Where(x => x.ProductId == id).ToList();
         return Ok(value);
     }
-    
-    
 }

@@ -82,7 +82,7 @@ public class ProductDetailService : IProductDetailServices
 
     public async Task<GetByIdProductImageDto> GetByProductIdProductImageAsync(string id)
     {
-        HttpResponseMessage responseMessage = await _httpClient.GetAsync($"ProductImages/ProductImagesByProductId/{id}/");
+        HttpResponseMessage responseMessage = await _httpClient.GetAsync($"ProductImages/ProductImagesByProductId/{id}");
         GetByIdProductImageDto? values = await responseMessage.Content.ReadFromJsonAsync<GetByIdProductImageDto>();
         return values;
     }
