@@ -16,7 +16,7 @@
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td class="align-middle"><img src="#" alt="" style="width: 50px;">
+                            <td class="align-middle"><img src="@item.ProductImageUrl" alt="" style="width: 50px;">
                                 @item.ProductName
                             </td>
                             <td class="align-middle">$@item.Price</td>
@@ -37,11 +37,11 @@
                             </td>
                             <td class="align-middle">$@item.Price</td>
                             <td class="align-middle">
-                                <button class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button>
+                                <a href="/Basket/RemoveBasketItem/@item.ProductId" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a>
                             </td>
                         </tr>
                     }
-                    
+
                 </tbody>
             </table>
         </div>
