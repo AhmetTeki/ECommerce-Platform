@@ -17,8 +17,8 @@ public class DiscountService : IDiscountService
     public async Task<List<ResultCouponDto>> GetAllCouponsAsync()
     {
         string sql = "SELECT * FROM Coupons";
-        
-        using (IDbConnection connection= _dapperContext.CreateConnection)
+
+        using (IDbConnection connection = _dapperContext.CreateConnection)
         {
             IEnumerable<ResultCouponDto> result = await connection.QueryAsync<ResultCouponDto>(sql);
             return result.ToList();
@@ -27,16 +27,16 @@ public class DiscountService : IDiscountService
 
     public async Task CreateCouponAsync(CreateCouponDto createCouponDto)
     {
-       string sql = "INSERT INTO Coupons (Code, Rate, IsActive, ValidDate) VALUES (@Code, @Rate, @IsActive, @ValidDate)";
-       DynamicParameters paramaters = new DynamicParameters();
-       paramaters.Add("@Code", createCouponDto.Code);
-       paramaters.Add("@Rate", createCouponDto.Rate);
-       paramaters.Add("@IsActive", createCouponDto.IsActive);
-       paramaters.Add("@ValidDate", createCouponDto.ValidDate);
-       using (IDbConnection connection= _dapperContext.CreateConnection)
-       {
-           await connection.ExecuteAsync(sql, paramaters);
-       }
+        string sql = "INSERT INTO Coupons (Code, Rate, IsActive, ValidDate) VALUES (@Code, @Rate, @IsActive, @ValidDate)";
+        DynamicParameters paramaters = new DynamicParameters();
+        paramaters.Add("@Code", createCouponDto.Code);
+        paramaters.Add("@Rate", createCouponDto.Rate);
+        paramaters.Add("@IsActive", createCouponDto.IsActive);
+        paramaters.Add("@ValidDate", createCouponDto.ValidDate);
+        using (IDbConnection connection = _dapperContext.CreateConnection)
+        {
+            await connection.ExecuteAsync(sql, paramaters);
+        }
     }
 
     public async Task UpdateCouponAsync(UpdateCouponDto updateCouponDto)
@@ -48,7 +48,7 @@ public class DiscountService : IDiscountService
         paramaters.Add("@IsActive", updateCouponDto.IsActive);
         paramaters.Add("@ValidDate", updateCouponDto.ValidDate);
         paramaters.Add("@CouponId", updateCouponDto.CouponId);
-        using (IDbConnection connection= _dapperContext.CreateConnection)
+        using (IDbConnection connection = _dapperContext.CreateConnection)
         {
             await connection.ExecuteAsync(sql, paramaters);
         }
@@ -56,13 +56,13 @@ public class DiscountService : IDiscountService
 
     public async Task DeleteCouponAsync(int id)
     {
-       string sql = "DELETE FROM Coupons WHERE CouponId=@CouponId";
-       DynamicParameters paramaters = new DynamicParameters();
-       paramaters.Add("@CouponId", id);
-       using (IDbConnection connection= _dapperContext.CreateConnection)
-       {
-           await connection.ExecuteAsync(sql, paramaters);
-       }
+        string sql = "DELETE FROM Coupons WHERE CouponId=@CouponId";
+        DynamicParameters paramaters = new DynamicParameters();
+        paramaters.Add("@CouponId", id);
+        using (IDbConnection connection = _dapperContext.CreateConnection)
+        {
+            await connection.ExecuteAsync(sql, paramaters);
+        }
     }
 
     public async Task<GetByIdCouponDto> GetByIdCouponAsync(int id)
@@ -72,8 +72,21 @@ public class DiscountService : IDiscountService
         paramaters.Add("@CouponId", id);
         using (IDbConnection connection = _dapperContext.CreateConnection)
         {
-           GetByIdCouponDto? values = await connection.QueryFirstOrDefaultAsync<GetByIdCouponDto>(sql, paramaters);
-           return values;
+            GetByIdCouponDto? values = await connection.QueryFirstOrDefaultAsync<GetByIdCouponDto>(sql, paramaters);
+            return values;
+        }
+    }
+
+    public async Task<ResultCouponDto> GetCodeDetailByCodeAsync(string code)
+    {
+        string sql = "SELECT * FROM Coupons WHERE Code = @code";
+        DynamicParameters paramaters = new DynamicParameters();
+        paramaters.Add("@code", code);
+
+        using (IDbConnection connection = _dapperContext.CreateConnection)
+        {
+            ResultCouponDto? values = await connection.QueryFirstOrDefaultAsync<ResultCouponDto>(sql, paramaters);
+            return values;
         }
     }
 }

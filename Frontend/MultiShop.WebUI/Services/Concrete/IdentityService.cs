@@ -42,10 +42,15 @@ public class IdentityService : IIdentityService
             ClientSecret = _clientSettings.MultiShopManagerClient.ClientSecret,
             UserName = dto.UserName,
             Password = dto.Password,
-            Address = discoveryEndPoint.TokenEndpoint
+            Address = discoveryEndPoint.TokenEndpoint,
+            Scope = "offline_access openid profile email BasketFullPermission CatalogFullPermission DiscountFullPermission CommentFullPermission PaymentFullPermission OcelotFullPermission IdentityServerApi"
         };
 
         TokenResponse? token = await _httpClient.RequestPasswordTokenAsync(passwordTokenRequest);
+        
+        // Geçici debug için ekle
+        Console.WriteLine("ACCESS TOKEN: " + token.AccessToken);
+        Console.WriteLine("REFRESH TOKEN: " + token.RefreshToken);
 
         UserInfoRequest userInfoRequest = new UserInfoRequest
         {
@@ -90,13 +95,13 @@ public class IdentityService : IIdentityService
         DiscoveryDocumentResponse? discoveryEndPoint = await _httpClient.GetDiscoveryDocumentAsync(new DiscoveryDocumentRequest
         {
             Address = _servicesApiSettings.IdentityServerUrl,
-            Policy = new DiscoveryPolicy
-            {
-                RequireHttps = false
-            }
+            Policy = new DiscoveryPolicy { RequireHttps = false }
         });
 
         string? refreshToken = await _httpContextAccessor.HttpContext.GetTokenAsync(OpenIdConnectParameterNames.RefreshToken);
+
+        if (string.IsNullOrEmpty(refreshToken))
+            return false;
 
         RefreshTokenRequest refreshTokenRequest = new()
         {
@@ -108,36 +113,26 @@ public class IdentityService : IIdentityService
 
         TokenResponse? token = await _httpClient.RequestRefreshTokenAsync(refreshTokenRequest);
 
-        var authenticationToken = new List<AuthenticationToken>()
+        if (token.IsError)
+            return false;
+
+        var authenticationTokens = new List<AuthenticationToken>
         {
-            new AuthenticationToken
-            {
-                Name = OpenIdConnectParameterNames.AccessToken,
-                Value = token.AccessToken
-            },
-            new AuthenticationToken
-            {
-                Name = OpenIdConnectParameterNames.RefreshToken,
-                Value = token.RefreshToken
-            },
-            new AuthenticationToken
-            {
-                Name = OpenIdConnectParameterNames.ExpiresIn,
-                Value = DateTime.Now.AddSeconds(token.ExpiresIn).ToString()
-            }
+            new AuthenticationToken { Name = OpenIdConnectParameterNames.AccessToken, Value = token.AccessToken },
+            new AuthenticationToken { Name = OpenIdConnectParameterNames.RefreshToken, Value = token.RefreshToken },
+            new AuthenticationToken { Name = OpenIdConnectParameterNames.ExpiresIn, Value = DateTime.Now.AddSeconds(token.ExpiresIn).ToString() }
         };
 
         AuthenticateResult result = await _httpContextAccessor.HttpContext.AuthenticateAsync();
-
         AuthenticationProperties? properties = result.Properties;
 
-        if (properties != null)
+        if (properties != null && result.Principal != null)
         {
-            properties.StoreTokens(authenticationToken);
-
-            if (result.Principal != null)
-                await _httpContextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, result.Principal,
-                    properties);
+            properties.StoreTokens(authenticationTokens);
+            await _httpContextAccessor.HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                result.Principal,
+                properties);
         }
 
         return true;

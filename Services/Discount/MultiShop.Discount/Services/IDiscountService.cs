@@ -13,4 +13,6 @@ public interface IDiscountService
     Task DeleteCouponAsync(int id);
     
     Task<GetByIdCouponDto> GetByIdCouponAsync(int id);
+    
+    Task<ResultCouponDto> GetCodeDetailByCodeAsync(string code);
 }

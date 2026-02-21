@@ -43,6 +43,7 @@
     <AdditionalFiles Include="Areas\Admin\Views\Comment\CreateCategory.cshtml" />
     <AdditionalFiles Include="Areas\Admin\Views\Comment\Index.cshtml" />
     <AdditionalFiles Include="Areas\Admin\Views\Comment\UpdateCategory.cshtml" />
+    <AdditionalFiles Include="Views\Shared\Components\_BasketDiscountPartial\Default.cshtml" />
   </ItemGroup>
 
 </Project>

@@ -26,9 +26,10 @@ public class ResourceOwnerPasswordTokenHandler : DelegatingHandler
         if (response.StatusCode == HttpStatusCode.Unauthorized)
         {
             bool tokenResponse = await _identityService.GetRefreshToken();
-            if (tokenResponse != null)
+            if (tokenResponse)
             {
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+                string? newAccessToken = await _httpContextAccessor.HttpContext.GetTokenAsync(OpenIdConnectParameterNames.AccessToken);
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", newAccessToken);
                 response = await base.SendAsync(request, cancellationToken);
             }
         }

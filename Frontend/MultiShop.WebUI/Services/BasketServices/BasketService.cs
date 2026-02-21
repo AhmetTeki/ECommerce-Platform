@@ -13,7 +13,15 @@ public class BasketService : IBasketService
 
     public async Task<BasketTotalDto> GetBasket()
     {
-        HttpResponseMessage responseMessage = await _httpClient.GetAsync($"baskets");
+        HttpResponseMessage responseMessage = await _httpClient.GetAsync("baskets");
+    
+        if (!responseMessage.IsSuccessStatusCode)
+        {
+            var errorContent = await responseMessage.Content.ReadAsStringAsync();
+            // Hata mesajını logla veya fırlat
+            throw new Exception($"API Error: {responseMessage.StatusCode} - {errorContent}");
+        }
+    
         BasketTotalDto? values = await responseMessage.Content.ReadFromJsonAsync<BasketTotalDto>();
         return values;
     }

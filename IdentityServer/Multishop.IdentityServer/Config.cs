@@ -75,7 +75,8 @@ namespace Multishop.IdentityServer
                 ClientSecrets = { new Secret("multishopsecret".Sha256()) },
                 AllowedScopes =
                 {
-                    "DiscountFullPermission", "CatalogFullPermission", "BasketFullPermission", "OcelotFullPermission","CommentFullPermission", "PaymentFullPermission" ,
+                    "DiscountFullPermission", "CatalogFullPermission", "BasketFullPermission", "OcelotFullPermission",
+                    "CommentFullPermission", "PaymentFullPermission",
                     IdentityServerConstants.LocalApi.ScopeName,
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
@@ -87,16 +88,18 @@ namespace Multishop.IdentityServer
             new Client
             {
                 ClientId = "MultishopManagerId",
-                ClientName = "Multishop Manager User",
                 AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                AllowOfflineAccess = true,
                 ClientSecrets = { new Secret("multishopsecret".Sha256()) },
                 AllowedScopes =
                 {
-                    "CatalogFullPermission", "BasketFullPermission", "OcelotFullPermission","CommentFullPermission", "PaymentFullPermission",
+                    "CatalogFullPermission", "DiscountFullPermission", "BasketFullPermission", "OcelotFullPermission",
+                    "CommentFullPermission", "PaymentFullPermission",
                     IdentityServerConstants.LocalApi.ScopeName,
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
                     IdentityServerConstants.StandardScopes.Email,
+                    IdentityServerConstants.StandardScopes.OfflineAccess // <- BU EKSİKTİ
                 }
             },
 
@@ -109,7 +112,8 @@ namespace Multishop.IdentityServer
                 ClientSecrets = { new Secret("multishopsecret".Sha256()) },
                 AllowedScopes =
                 {
-                    "CatalogFullPermission", "DiscountFullPermission", "OrderFullPermission", "CargoFullPermission", "BasketFullPermission","OcelotFullPermission", "CommentFullPermission", "PaymentFullPermission",
+                    "CatalogFullPermission", "DiscountFullPermission", "OrderFullPermission", "CargoFullPermission", "BasketFullPermission",
+                    "OcelotFullPermission", "CommentFullPermission", "PaymentFullPermission",
                     IdentityServerConstants.LocalApi.ScopeName,
                     IdentityServerConstants.StandardScopes.OpenId,
                     IdentityServerConstants.StandardScopes.Profile,
